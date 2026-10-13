@@ -1,0 +1,38 @@
+# ai-physics-sim-generator — default runtime config
+# Every value here is overridable via env: APSIM_<SECTION>_<KEY>
+
+[app]
+name = "ai-physics-sim-generator"
+version = "0.9.4"
+offline = true
+workspace_root = "workspace"
+log_level = "info"
+
+[pipeline]
+max_steps = 200_000
+default_dt = 0.0166
+seed = 6767
+worker_threads = 4
+cache_dir = ".apcache"
+
+[ingest]
+accept_extensions = [".json", ".yaml", ".csv", ".apsim", ".txt"]
+max_spec_bytes = 8_388_608
+
+[processors]
+enabled = ["rigid_body", "soft_body", "fluid_sph", "particle_field"]
+default_solver = "semi_implicit_euler"
+
+[drivers]
+enabled = ["apsim_bundle", "csv_trajectory", "gltf_export"]
+plugin_allowlist = []
+output_root = "sim_outputs"
+
+[telemetry]
+enabled = false
+endpoint = ""
+
+[security]
+allow_eval = false
+sandbox_writes = true
+max_ingest_depth = 6
